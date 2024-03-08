@@ -1,4 +1,4 @@
-use actix_web::{get, post, web, patch, App, HttpResponse, HttpServer, Responder};
+use actix_web::{get, post, patch, App, HttpResponse, HttpServer, Responder, web::Json};
 use validator::Validate;
 
 mod models;
@@ -9,7 +9,7 @@ async fn get_pizzas() -> impl Responder {
 }
 
 #[post("/buypizza")]
-async fn buy_pizza(body: Json<BuyPizzaRequest>) -> impl Responder {
+async fn buy_pizza(body: Json<models::BuyPizzaRequest>) -> impl Responder {
     // validation
     let is_valid = body.validate();
     match is_valid {
@@ -17,7 +17,7 @@ async fn buy_pizza(body: Json<BuyPizzaRequest>) -> impl Responder {
             let pizza_name = body.pizza_name.clone();
             HttpResponse::Ok().body(format!("Pizza entered is {pizza_name}"))
         }
-        Err(e) => HttpResponse::Ok().body("Pizza name required"),
+        Err(_e) => HttpResponse::Ok().body("Pizza name required"),
     }
 }
 
