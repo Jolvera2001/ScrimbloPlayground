@@ -1,6 +1,7 @@
 /Calculator/target
 /smallserver/target
 /smallFullStack/smallServerfs/target
+/AplHelp/aplbackend/target
 
 # Logs
 /smallFullStack/vueProj/logs
