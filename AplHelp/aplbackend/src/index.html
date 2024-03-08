@@ -4,7 +4,7 @@
         <title>Actix Test</title>
     </head>
     <body>
-        <form>
+        <form id="basic-form">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -14,7 +14,13 @@
             <label for="message">Message:</label>
             <textarea id="message" name="message" required></textarea>
 
-            <button type="submit">Submit</button>
+            <button type="submit" id="submit-button">Submit</button>
+            <script>
+                const form = document.getElementById('basic-form');
+                const submitButton = document.getElementById('submit-button');
+
+                // so some API thingy
+            </script>
         </form>
     </body>
 </html>

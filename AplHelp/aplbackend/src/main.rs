@@ -1,26 +1,38 @@
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use actix_web::{get, post, web, patch, App, HttpResponse, HttpServer, Responder};
+use validator::Validate;
 
-#[get("/")]
-async fn hello() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
+mod models;
+
+#[get("/pizzas")]
+async fn get_pizzas() -> impl Responder {
+    HttpResponse::Ok().body("Get pizzas")
 }
 
-#[post("/echo")]
-async fn echo(req_body: String) -> impl Responder {
-    HttpResponse::Ok().body(req_body)
+#[post("/buypizza")]
+async fn buy_pizza(body: Json<BuyPizzaRequest>) -> impl Responder {
+    // validation
+    let is_valid = body.validate();
+    match is_valid {
+        Ok(_) => {
+            let pizza_name = body.pizza_name.clone();
+            HttpResponse::Ok().body(format!("Pizza entered is {pizza_name}"))
+        }
+        Err(e) => HttpResponse::Ok().body("Pizza name required"),
+    }
 }
 
-async fn manual_hello() -> impl Responder {
-    HttpResponse::Ok().body("Hey there!")
+#[patch("/updatepizza/{uuid}")]
+async fn update_pizza() -> impl Responder {
+    HttpResponse::Ok().body("Update pizza")
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     HttpServer::new(|| {
         App::new()
-            .service(hello)
-            .service(echo)
-            .route("/hey", web::get().to(manual_hello))
+            .service(get_pizzas)
+            .service(buy_pizza)
+            .service(update_pizza)
     })
     .bind(("127.0.0.1", 8080))?
     .run()
