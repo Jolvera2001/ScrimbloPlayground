@@ -1,19 +1,18 @@
 use rocket::serde::{Serialize, Deserialize, Debug};
 
 #[derive(Debug, Serialize, Deserialize)]
-struct User {
-    userId: i32,
+pub struct User {
+    id: i32,
     username: String,
     password: String,
     email: String,
     firstName: String,
-    lastName: String,
-    dateCreated: String
+    lastName: String
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-struct Application {
-    jobId : i32,
+pub struct Application {
+    id : i32,
     jobTitle: String,
     jobDescription: String,
     company: String,
