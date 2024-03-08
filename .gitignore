@@ -1,3 +1,28 @@
 /Calculator/target
 /smallserver/target
 /smallFullStack/smallServerfs/target
+
+# Logs
+/smallFullStack/vueProj/logs
+/smallFullStack/vueProj/*.log
+/smallFullStack/vueProj/npm-debug.log*
+/smallFullStack/vueProj/yarn-debug.log*
+/smallFullStack/vueProj/yarn-error.log*
+/smallFullStack/vueProj/pnpm-debug.log*
+/smallFullStack/vueProj/lerna-debug.log*
+
+/smallFullStack/vueProj/node_modules
+/smallFullStack/vueProj/dist
+/smallFullStack/vueProj/dist-ssr
+/smallFullStack/vueProj/*.local
+
+# Editor directories and files
+/smallFullStack/vueProj/.vscode/*
+/smallFullStack/vueProj/!.vscode/extensions.json
+/smallFullStack/vueProj/.idea
+/smallFullStack/vueProj/.DS_Store
+/smallFullStack/vueProj/*.suo
+/smallFullStack/vueProj/*.ntvs*
+/smallFullStack/vueProj/*.njsproj
+/smallFullStack/vueProj/*.sln
+/smallFullStack/vueProj/*.sw?
