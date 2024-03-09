@@ -1,7 +1,7 @@
 use actix_web::{get, post, patch, App, HttpResponse, HttpServer, Responder, web::Json};
 use validator::Validate;
-
 mod models;
+use crate::models::BuyPizzaRequest;
 
 #[get("/pizzas")]
 async fn get_pizzas() -> impl Responder {
@@ -9,7 +9,7 @@ async fn get_pizzas() -> impl Responder {
 }
 
 #[post("/buypizza")]
-async fn buy_pizza(body: Json<models::BuyPizzaRequest>) -> impl Responder {
+async fn buy_pizza(body: Json<BuyPizzaRequest>) -> impl Responder {
     // validation
     let is_valid = body.validate();
     match is_valid {
