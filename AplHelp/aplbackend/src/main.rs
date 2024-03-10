@@ -2,7 +2,9 @@ use actix_web::{get, post, patch, App, HttpResponse, HttpServer, Responder, web:
 use validator::Validate;
 
 mod models;
+mod db;
 
+use crate::db::Database;
 use crate::models::{ BuyPizzaRequest, UpdatePizzaURL };
 
 #[get("/pizzas")]
