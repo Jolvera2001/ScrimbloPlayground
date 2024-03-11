@@ -1,9 +1,10 @@
 use surrealdb::engine::remote::ws::{Client, Ws};
 use surrealdb::opt::auth::Root;
 use surrealdb::{Error, Surreal};
+use crate::models::Pizza;
 
 #[derive(Clone)]
-pun struct Database {
+pub struct Database {
     pub client: Surreal<Client>,
     pub name_space: String,
     pub db_name: String, 
@@ -16,11 +17,31 @@ impl Database {
             username: "root",
             password: "root"
         })
-        .await?
+        .await?;
         client.use_ns("surreal").use_db("pizzas").await.unwrap();
         Ok(Database {
             client, name_space: String::from("surreal"),
             db_name: String::from("pizzas")
         })
+    }
+
+    pub async fn get_all_pizzas(&self) -> Option<Vec<Pizza>> {
+        let result: Result<Vec<_>, surrealdb::Error> = self.client.select("pizza").await;
+        match result {
+            Ok(all_pizzas) => Some::<Vec<_>>(all_pizzas),
+            Err(_) => None,
+        }
+    }
+
+    pub async fn add_pizza(&self, new_pizza: Pizza) -> Option<Pizza> {
+        let created_pizza = self.client
+            .create(("pizza", new_pizza.uuid.clone()))
+            .content(new_pizza)
+            .await;
+
+        match created_pizza {
+            Ok(pizza) => pizza,
+            Err(_) => None,
+        }
     }
 }

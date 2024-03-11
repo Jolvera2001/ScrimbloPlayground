@@ -7,10 +7,10 @@ edition = "2021"
 
 [dependencies]
 actix-web = "4"
-async-trait = "0.1.73"
+async-trait = "0.1.77"
 derive_more = "0.99.17"
 json = "0.12.4"
-serde = { version = "1.0.188", features = ["derive"] }
-uuid = "1.4.1"
+serde = { version = "1.0.197", features = ["derive"] }
+uuid = "1.7.0"
 validator = { version = "0.17.0", features = ["derive"] }
 surrealdb = "1.2.2"

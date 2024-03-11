@@ -4,4 +4,5 @@ pub mod application;
 
 pub use pizza::UpdatePizzaURL;
 pub use pizza::BuyPizzaRequest;
+pub use pizza::Pizza;
 
